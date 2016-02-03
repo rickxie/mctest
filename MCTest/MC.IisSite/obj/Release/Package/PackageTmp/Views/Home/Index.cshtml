@@ -1,0 +1,80 @@
+﻿@using System.Web.UI.WebControls
+@using Microsoft.Ajax.Utilities
+@model List<MC.IisSite.Models.IisSite>
+@{
+     
+    ViewBag.Title = "测试环境站点集";
+}
+<h3><a class="btn btn-success" style="display: none" id="form_save">保存</a></h3>
+<table class="table table-striped">
+    <tr>
+        <td style="width: 10px">Id</td>
+        <td style="width: 60px">协议</td>
+        <td style="width: 100px">Ip v4</td>
+        <td style="width: 50px">端口</td>
+        <td style="width: 200px">访问</td>
+        <td style="width: 200px">名称</td>
+        <td>备注</td>
+    </tr>
+@foreach (var q in Model)
+{
+    if (q.Replaced.IsNullOrWhiteSpace())
+    {
+        <tr id="site_@q.Id">
+            <td class="c">@q.Id</td>
+            <td class="c">@q.Protocol</td>
+            <td class="c">@q.Ip</td>
+            <td class="c">@q.Port</td>
+            <td><a href="@q.Protocol://@q.Ip:@q.Port" class="btn btn-primary btn-xs">点击访问</a></td>
+            <td class="c">@q.Name</td>
+            <td class="c">@q.Memo</td>
+        </tr>
+    }
+    else
+    {
+        @(new HtmlString(q.Replaced))
+    }
+
+}
+
+</table>
+ 
+
+@section Scripts {
+    <script type="text/javascript">
+       
+        var updatedList = [];
+        $('#form_save').click(function() {
+            $.post("/Home/Save", { save: updatedList}, function () {
+                
+            });
+        });
+        function collectRow(id) {
+            for (var i = 0; i < updatedList.length; i++) {
+                if (updatedList[i].id === id) {
+                    return;
+                }
+            }
+            var detail = $("#site_" + id);
+            updatedList.push({ Id: id, Detail: detail[0].outerHTML });
+        }
+
+
+        $(".c").dblclick(function() {
+            var element = $(this)[0];
+            var oldhtml = element.innerHTML; //获得元素之前的内容
+            var newobj = document.createElement('input'); //创建一个input元素
+            newobj.value = oldhtml;
+            newobj.type = 'text'; //为newobj元素添加类型
+            //设置newobj失去焦点的事件
+            newobj.onblur = function() {
+                element.innerHTML = this.value ? this.value : oldhtml; //当触发时判断newobj的值是否为空，为空则不修改，并返回oldhtml。
+                $('#form_save').show();
+                collectRow(element.parentElement.children[0].innerText);
+            }
+            element.innerHTML = ''; //设置元素内容为空
+            element.appendChild(newobj); //添加子元素　
+            newobj.focus(); //获得焦点
+        });
+    </script>
+}

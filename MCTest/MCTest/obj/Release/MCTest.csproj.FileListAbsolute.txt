@@ -1,0 +1,14 @@
+D:\Study\MCTest\MCTest\MCTest\bin\Release\MCTest.exe.config
+D:\Study\MCTest\MCTest\MCTest\bin\Release\MCTest.exe
+D:\Study\MCTest\MCTest\MCTest\bin\Release\MCTest.pdb
+D:\Study\MCTest\MCTest\MCTest\bin\Release\Castle.Core.dll
+D:\Study\MCTest\MCTest\MCTest\bin\Release\Castle.Windsor.dll
+D:\Study\MCTest\MCTest\MCTest\bin\Release\Message.Proxy.dll
+D:\Study\MCTest\MCTest\MCTest\bin\Release\Newtonsoft.Json.dll
+D:\Study\MCTest\MCTest\MCTest\bin\Release\Message.Proxy.pdb
+D:\Study\MCTest\MCTest\MCTest\bin\Release\Castle.Core.xml
+D:\Study\MCTest\MCTest\MCTest\bin\Release\Castle.Windsor.xml
+D:\Study\MCTest\MCTest\MCTest\bin\Release\Newtonsoft.Json.xml
+D:\Study\MCTest\MCTest\MCTest\obj\Release\MCTest.csprojResolveAssemblyReference.cache
+D:\Study\MCTest\MCTest\MCTest\obj\Release\MCTest.exe
+D:\Study\MCTest\MCTest\MCTest\obj\Release\MCTest.pdb

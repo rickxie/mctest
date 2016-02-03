@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MCTest", "MCTest\MCTest.csproj", "{A2B4048A-1BBA-41A9-867A-5A70DAC7FDA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MC.IisSite", "MC.IisSite\MC.IisSite.csproj", "{3D2A3D35-086E-4154-9EBF-95ADC6E6FF3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Message.Proxy", "Message.Proxy\Message.Proxy.csproj", "{8B29E593-E16C-4145-8C79-79FE84936215}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2B4048A-1BBA-41A9-867A-5A70DAC7FDA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2B4048A-1BBA-41A9-867A-5A70DAC7FDA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2B4048A-1BBA-41A9-867A-5A70DAC7FDA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2B4048A-1BBA-41A9-867A-5A70DAC7FDA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D2A3D35-086E-4154-9EBF-95ADC6E6FF3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D2A3D35-086E-4154-9EBF-95ADC6E6FF3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D2A3D35-086E-4154-9EBF-95ADC6E6FF3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D2A3D35-086E-4154-9EBF-95ADC6E6FF3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B29E593-E16C-4145-8C79-79FE84936215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B29E593-E16C-4145-8C79-79FE84936215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B29E593-E16C-4145-8C79-79FE84936215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B29E593-E16C-4145-8C79-79FE84936215}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,7 @@
+D:\Study\MCTest\MCTest\Message.Proxy\bin\Release\Message.Proxy.dll
+D:\Study\MCTest\MCTest\Message.Proxy\bin\Release\Message.Proxy.pdb
+D:\Study\MCTest\MCTest\Message.Proxy\bin\Release\System.Net.Http.dll
+D:\Study\MCTest\MCTest\Message.Proxy\bin\Release\System.Net.Http.xml
+D:\Study\MCTest\MCTest\Message.Proxy\bin\Release\zh-Hans\System.Net.Http.resources.dll
+D:\Study\MCTest\MCTest\Message.Proxy\obj\Release\Message.Proxy.dll
+D:\Study\MCTest\MCTest\Message.Proxy\obj\Release\Message.Proxy.pdb

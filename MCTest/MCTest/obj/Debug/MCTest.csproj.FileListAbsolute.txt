@@ -1,0 +1,17 @@
+D:\Study\MCTest\MCTest\MCTest\obj\Debug\MCTest.csprojResolveAssemblyReference.cache
+D:\Study\MCTest\MCTest\MCTest\bin\Debug\MCTest.exe.config
+D:\Study\MCTest\MCTest\MCTest\bin\Debug\MCTest.exe
+D:\Study\MCTest\MCTest\MCTest\bin\Debug\MCTest.pdb
+D:\Study\MCTest\MCTest\MCTest\bin\Debug\Castle.Core.dll
+D:\Study\MCTest\MCTest\MCTest\bin\Debug\Castle.Windsor.dll
+D:\Study\MCTest\MCTest\MCTest\bin\Debug\Message.Proxy.dll
+D:\Study\MCTest\MCTest\MCTest\bin\Debug\Newtonsoft.Json.dll
+D:\Study\MCTest\MCTest\MCTest\bin\Debug\Message.Proxy.pdb
+D:\Study\MCTest\MCTest\MCTest\bin\Debug\Castle.Core.xml
+D:\Study\MCTest\MCTest\MCTest\bin\Debug\Castle.Windsor.xml
+D:\Study\MCTest\MCTest\MCTest\bin\Debug\Newtonsoft.Json.xml
+D:\Study\MCTest\MCTest\MCTest\obj\Debug\MCTest.exe
+D:\Study\MCTest\MCTest\MCTest\obj\Debug\MCTest.pdb
+D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\MCTest.exe.config
+D:\Git-MC\mctest\MCTest\MCTest\obj\Debug\MCTest.exe
+D:\Git-MC\mctest\MCTest\MCTest\obj\Debug\MCTest.pdb
