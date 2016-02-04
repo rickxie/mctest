@@ -37,6 +37,7 @@ namespace MCTest
             obj = 工厂.通过反射获取实例(currAss + ".Clone");
             obj = 工厂.通过反射获取实例(currAss + ".BasicAuthTest");
             obj = 工厂.通过反射获取实例(currAss + ".RegexExcract");
+            obj = 工厂.通过反射获取实例(currAss + ".QqMonitor");
 
             obj.Main();
             Console.Read();

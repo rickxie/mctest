@@ -15,3 +15,14 @@ D:\Study\MCTest\MCTest\MCTest\obj\Debug\MCTest.pdb
 D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\MCTest.exe.config
 D:\Git-MC\mctest\MCTest\MCTest\obj\Debug\MCTest.exe
 D:\Git-MC\mctest\MCTest\MCTest\obj\Debug\MCTest.pdb
+D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\MCTest.exe
+D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\MCTest.pdb
+D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\Castle.Core.dll
+D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\Castle.Windsor.dll
+D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\Message.Proxy.dll
+D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\Newtonsoft.Json.dll
+D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\Message.Proxy.pdb
+D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\Castle.Core.xml
+D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\Castle.Windsor.xml
+D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\Newtonsoft.Json.xml
+D:\Git-MC\mctest\MCTest\MCTest\obj\Debug\MCTest.csprojResolveAssemblyReference.cache

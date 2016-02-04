@@ -76,6 +76,7 @@
     <Compile Include="No.014 Clone.cs" />
     <Compile Include="No.015 BasicAuth.cs" />
     <Compile Include="No.16 EncodingAndDecoding.cs" />
+    <Compile Include="No. 16 QqMonitor.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
