@@ -9,3 +9,4 @@ D:\Git-MC\mctest\MCTest\MCTest.WinformTest\obj\Debug\MCTest.WinformTest.exe
 D:\Git-MC\mctest\MCTest\MCTest.WinformTest\obj\Debug\MCTest.WinformTest.pdb
 D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Debug\WeifenLuo.WinFormsUI.Docking.dll
 D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Debug\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Debug\MaterialSkin.dll
