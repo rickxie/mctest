@@ -10,54 +10,42 @@ namespace MCTest
 {
     public class AnyscAwait: IOutput
     {
-        async Task<bool> ConsoleA()
+        List<int> threadId = new List<int>();
+        async Task<bool> TaskA_Async(int i)
         {
-            Trace.WriteLine(string.Format("Start ConsoleA Thread:{0}", Thread.CurrentThread.ManagedThreadId));
+            Console.WriteLine(string.Format("Start "+i+" Thread:{0}", Thread.CurrentThread.ManagedThreadId));
             await Task.Delay(5000);
-            Trace.WriteLine(string.Format("End ConsoleA Thread:{0}", Thread.CurrentThread.ManagedThreadId));
+            if (!threadId.Exists(r=>r == Thread.CurrentThread.ManagedThreadId))
+            {
+                threadId.Add(Thread.CurrentThread.ManagedThreadId);
+            }
+            Console.WriteLine(string.Format("End  " + i + "  Thread:{0}", Thread.CurrentThread.ManagedThreadId));
             return true;
         }
-        async Task<bool> ConsoleB()
+      
+        private void DoOtherThing()
         {
-            Trace.WriteLine(string.Format("ConsoleB Thread:{0}", Thread.CurrentThread.ManagedThreadId));
-            await Task.Delay(5000);
-            Trace.WriteLine(string.Format("End ConsoleB Thread:{0}", Thread.CurrentThread.ManagedThreadId));
-            return true;
-        }
-        async Task<bool> ConsoleC()
-        {
-            Trace.WriteLine(string.Format("ConsoleC Thread:{0}", Thread.CurrentThread.ManagedThreadId));
-            await Task.Delay(5000);
-            Trace.WriteLine(string.Format("End ConsoleC Thread:{0}", Thread.CurrentThread.ManagedThreadId));
-            return true;
+            Console.WriteLine("Doing other things");
         }
         async void AnsyMain()
         {
             var now = DateTime.Now;
-            
-            Trace.WriteLine(string.Format("AnsyMain Thread:{0}", Thread.CurrentThread.ManagedThreadId));
-            //await ConsoleA();
-            //Console.WriteLine("AfterA");
-            //await ConsoleB();
-            //Console.WriteLine("AfterB");
-            //var result = await ConsoleC();
-            //Console.WriteLine("AfterC");
-
-            var taskA = ConsoleA();
-            Console.WriteLine("AfterA");
-            var taskB = ConsoleB();
-            Console.WriteLine("AfterB");
-            var taskC = ConsoleC();
-            Console.WriteLine("AfterC");
-            Task.WaitAll(taskA, taskB, taskC);
-            
-            Console.WriteLine("Total cost:{0}", (DateTime.Now - now).TotalMilliseconds);
+            List<Task> tasks = new List<Task>();
+            Console.WriteLine(string.Format("Main Method Thread:{0}", Thread.CurrentThread.ManagedThreadId));
+            for (int i = 0; i < 10000; i++)
+            {
+                tasks.Add(TaskA_Async(i));
+            }
+            Console.WriteLine("After TaskA");
+            DoOtherThing();
+            Console.WriteLine(string.Format("Main Method Thread:{0}", Thread.CurrentThread.ManagedThreadId));
+            Task.WaitAll(tasks.ToArray());
+            Console.WriteLine("Total thread Count:{0}", threadId.Count);
+            Console.WriteLine("Total time:{0}", (DateTime.Now - now).TotalMilliseconds);
         }
          public void Main()
         {
-            Trace.WriteLine(string.Format("Main Thread:{0}", Thread.CurrentThread.ManagedThreadId));
              AnsyMain();
-             Trace.WriteLine(string.Format("After Thread:{0}", Thread.CurrentThread.ManagedThreadId));
              Console.WriteLine("END");
         }
         

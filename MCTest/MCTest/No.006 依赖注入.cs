@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Castle.Core.Internal;
+using Castle.DynamicProxy;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
@@ -21,9 +22,10 @@ namespace MCTest
 //            var factory = new WindsorControllerFactory(null);
 //            var handlers = factory.GetHandlersFor(typeof(IFly), container);
 //            var abc = factory.GetPublicClasssFromApplicationAssembly(r => r.Is<IFly>());
-
-            IMyfly fly = container.Resolve<IMyfly>();
-            fly.Fly();
+            ProxyGenerator genrator = new ProxyGenerator();
+//            MyFly fly = genrator.CreateClassProxy<MyFly>();
+//            IMyfly fly = container.Resolve<IMyfly>();
+//            fly.Fly();
             Console.WriteLine("Public Class");
         }
 

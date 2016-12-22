@@ -4,7 +4,7 @@
 jsT.qq = {};
 jsT.qq.views = {};
 var buildPanel = function(){
-    var tpl = '<div class="panel chat-panel" id="panel-999" cmd="void" style="transition: -webkit-transform 0.4s cubic-bezier(0, 1, 0, 1); transform: translate3d(0px, 0px, 0px); display: block;"> <header id="panelHeader-999" class="panel_header"> <div id="panelLeftButton-999" class="btn btn_small btn_left btn_black btn_setting" cmd="clickLeftButton"> </div> <h1 id="panelTitle-999" class="text_ellipsis padding_20">按分组群发</h1> <button id="panelRightButton-999" class="btn btn_small btn_right btn_black btn_setting" cmd="clickRightButton"> <span id="panelRightButtonText-999" class="btn_text">关闭</span> </button> </header> <div id="panelBodyWrapper-999" class="panel_body_container" style="top: 45px; bottom: 50px; overflow: hidden;"> <div id="panelBody-999" class="panel_body chat_container" style="transition-property: -webkit-transform; transform-origin: 0px 0px 0px; transform: translate(0px, 0px) scale(1) translateZ(0px);"></div> <ul id="pannelMenuList-999" class="pannel_menu_list" style="display: block;"> <li cmd="viewQzone" class="viewQzone"> <div class="menu_list_icon"></div> QQ空间 </li> <li cmd="viewInfo" class="viewInfo"> <div class="menu_list_icon"></div> 详细资料 </li> <li cmd="viewRecord" class="viewRecord"> <div class="menu_list_icon"></div> 聊天记录 </li> </ul> </div> <footer id="panelFooter-999" class="chat_toolbar_footer"> <div class="chat_toolbar"> <textarea id="chat_textarea999" class="input input_white chat_textarea" style="height:320px;overflow-y: scroll;"></textarea> <button id="send_chat_btn_999" class="btn btn_small btn_blue" cmd="sendMsg"> <span class="btn_text">发送</span> </button> <textarea id="" class="input input_white chat_textarea hidden_textarea" style="height: 32px; width: 99964px;"></textarea> </div> </div> </footer> </div>';
+    var tpl = '<div class="panel chat-panel" id="panel-999" cmd="void" style="transition: -webkit-transform 0.4s cubic-bezier(0, 1, 0, 1); transform: translate3d(0px, 0px, 0px); display: block;"> <header id="panelHeader-999" class="panel_header"> <div id="panelLeftButton-999" class="btn btn_small btn_left btn_black btn_setting" cmd="clickLeftButton"> </div> <h1 id="panelTitle-999" class="text_ellipsis padding_20">按分组群发</h1> <button id="panelRightButton-999" class="btn btn_small btn_right btn_black btn_setting" cmd="clickRightButton"> <span id="panelRightButtonText-999" class="btn_text">关闭</span> </button> </header> <div id="panelBodyWrapper-999" class="panel_body_container" style="top: 45px; bottom: 95px; overflow: hidden;"> <div id="panelBody-999" class="panel_body chat_container" style="transition-property: -webkit-transform; transform-origin: 0px 0px 0px; transform: translate(0px, 0px) scale(1) translateZ(0px);"></div> </div> <footer id="panelFooter-999" class="chat_toolbar_footer"> <div class="chat_status" style="width: 0%; position: absolute; height: 5px; background-color: red;"></div> <div class="chat_toolbar"> <textarea id="chat_textarea999" class="input input_white chat_textarea" style="height:320px;overflow-y: scroll;"></textarea> <button id="send_chat_btn_999" class="btn btn_small btn_blue" cmd="sendMsg"> <span class="btn_text">发送</span> </button> <textarea id="" class="input input_white chat_textarea hidden_textarea" style="height: 32px; width: 99964px;"></textarea> </div> </div> </footer> </div>';
     if(jsT.qq.views.groupSend != null)
     {
         jsT.qq.views.groupSend.toggle();
@@ -33,12 +33,12 @@ var buildPanel = function(){
         var group = parseInt($('#groups-999').val());
         if (group > -1){
         var content = $('#chat_textarea999').val();
-        jsT.qq.sendMessageToGroup(group, content);
         var msgDom = '<div class="chat_content_group self  " _sender_uin="{0}"> <img class="chat_content_avatar" src="http://face3.web.qq.com/cgi/svr/face/getface?cache=1&amp;type=1&amp;f=40&amp;uin={0}&amp;t=1455020440&amp;vfwebqq={1}" width="40px" height="40px"> <p class="chat_nick">{2}</p> <p class="chat_content ">{3}</p> </div>';
         var selfinfo = jsT.qq.getSelfInfo();
         msgDom = msgDom.format(selfinfo.uin, mq.vfwebqq, selfinfo.nick, content);
-            $('#panelBody-999').append(msgDom);
-            $('#chat_textarea999').val('')
+        $('#panelBody-999').append(msgDom);
+        $('#chat_textarea999').val('');
+        jsT.qq.sendMessageToGroup(group, content);
         } else {
             alert("请选择群组");
         }
@@ -82,11 +82,24 @@ jsT.qq.getAccount = function(toUin){
     })
     return dtd;
 }
+jsT.qq.sendMsgAnsyc = function(uin, msg, width){
+    jsT.qq.sendMessage(uin, msg);
+    $('.chat_status').width(width);
+}
 jsT.qq.sendMessageToGroup = function(catId, msg){
+    var chatStatus = $('.chat_status');
+    if(chatStatus.width() != 0)
+    {
+        alert('有正在群发的任务，稍后再试!'); return;
+    }
     var allMembers = _.filter(jsT.qq.model.friends, { 'categories': catId});
-    _(allMembers).forEach(function(item){
-        jsT.qq.sendMessage(item.uin, msg);
-    })
+
+    for(var i = 0; i < allMembers.length ; i ++){
+        //jsT.qq.sendMessage(allMembers[i].uin, msg);
+        //chatStatus.width(((i+1)/allMembers.length * 100) + '%')
+        setTimeout('jsT.qq.sendMsgAnsyc({0},"{1}","{2}%");'.format(allMembers[i].uin, msg,((i+1)/allMembers.length * 100)), i*1000);
+    }
+    setTimeout('$(".chat_status").width(0);', allMembers.length *1000);
 }
 jsT.qq.model = {};
 //获取

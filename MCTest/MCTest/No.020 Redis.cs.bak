@@ -1,0 +1,124 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Timers;
+using System.Web.Script.Serialization;
+using Microsoft.Win32;
+using StackExchange.Redis;
+
+namespace MCTest
+{
+    public class RedisTest : IOutput
+    {
+        private const bool EnableSentine = false;
+        static ConfigurationOptions option = new ConfigurationOptions();
+
+        private readonly static ConnectionMultiplexer _sentinel;
+        private static ConnectionMultiplexer writeConn;
+        private static ConnectionMultiplexer readConn;
+        static ISubscriber sub;
+        static ISubscriber sentinelsub;
+        static RedisTest()
+        {
+            option.EndPoints.Add("127.0.0.1", 6380); //主
+                                                     //            option.EndPoints.Add("127.0.0.1", 6380); //从
+                                                                 option.ServiceName = "mymaster";
+                                                     //            option.TieBreaker = "";//sentinel模式一定要写
+            writeConn = ConnectionMultiplexer.Connect(option);
+            //            readConn = ConnectionMultiplexer.Connect(readOption);
+
+
+            if (EnableSentine)
+            {
+                sentinelsub = writeConn.GetSubscriber();
+                var sb = writeConn.GetSubscriber();
+                ConfigurationOptions sentineloption = new ConfigurationOptions();
+                sentineloption.TieBreaker = ""; //sentinel模式一定要写
+                sentineloption.EndPoints.Add("127.0.0.1", 5000); //
+                sentineloption.EndPoints.Add("127.0.0.1", 5001); //
+                sentineloption.CommandMap = CommandMap.Sentinel;
+                sentineloption.ServiceName = "mymaster";
+                _sentinel = ConnectionMultiplexer.Connect(sentineloption);
+                sentinelsub = _sentinel.GetSubscriber();
+                SubSentinel();
+            }
+        }
+        public void Main()
+        {
+            var writeDb = writeConn.GetDatabase(1);
+            //            var rdDb = readConn.GetDatabase(1);
+            var i = 0;
+            var get = writeDb.StringGet("testKeyRedis");
+            i = Convert.ToInt32(get);
+            while (true)
+            {
+                try
+                {
+                    i++;
+                    writeDb.StringSet("testKeyRedis", i.ToString());
+                    WriteLine("Set key:" + i);
+                    Thread.Sleep(1000);
+                    get = writeDb.StringGet("testKeyRedis");
+                    WriteLine("Get key:" + get);
+                }
+                catch (Exception)
+                {
+                    Thread.Sleep(1000);
+                    WriteError();
+                    continue;
+                }
+            }
+        }
+
+        private void WriteError()
+        {
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.WriteLine("Failed");
+        }
+        private void WriteLine(string text)
+        {
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.WriteLine(text);
+        }
+        private static void WriteWarn(string text)
+        {
+            Console.BackgroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(text);
+        }
+        public static void SubSentinel()
+        {
+            sentinelsub.Subscribe("+switch-master", (channel, message) =>
+            {
+                WriteWarn((string)message);
+            });
+        }
+    }
+
+    public class MiniAbpRedis
+    {
+        public ConfigurationOptions masterOption = new ConfigurationOptions();
+        public ConfigurationOptions slaveOption = new ConfigurationOptions();
+
+        public MiniAbpRedis()
+        {
+            //            readOptions 
+        }
+        private readonly static ConnectionMultiplexer _sentinel;
+        private static ConnectionMultiplexer writeConn;
+        private static ConnectionMultiplexer readConn;
+        static ISubscriber sub;
+        static ISubscriber sentinelsub;
+    }
+
+
+
+}

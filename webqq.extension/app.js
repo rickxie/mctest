@@ -1,6 +1,7 @@
 /**
  * Created by MC on 2016/2/4.
  */
+//var hostAddress = 'http://qq.hello2world.cn/';
 var hostAddress = 'http://localhost:63342/webqq.extension/';
 if(jsT != null){
     alert("代码已经安装！");

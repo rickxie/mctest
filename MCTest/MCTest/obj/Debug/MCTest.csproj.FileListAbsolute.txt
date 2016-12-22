@@ -26,3 +26,5 @@ D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\Castle.Core.xml
 D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\Castle.Windsor.xml
 D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\Newtonsoft.Json.xml
 D:\Git-MC\mctest\MCTest\MCTest\obj\Debug\MCTest.csprojResolveAssemblyReference.cache
+D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\StackExchange.Redis.dll
+D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\StackExchange.Redis.xml

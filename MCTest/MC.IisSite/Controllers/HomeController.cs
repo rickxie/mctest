@@ -7,6 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using MC.IisSite.Models;
 using System.DirectoryServices;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -16,6 +19,65 @@ namespace MC.IisSite.Controllers
     {
         public ActionResult Index()
         {
+            System.Drawing.Image imgSource = Image.FromFile(@"C:\inetpub\愿景周.jpg"); ;
+            System.Drawing.Imaging.ImageFormat thisFormat = imgSource.RawFormat;
+            int destWidth = 872, destHeight = 384;
+            int sW = destWidth, sH = destHeight;
+
+            Bitmap outBmp = new Bitmap(destWidth, destHeight);
+            Graphics g = Graphics.FromImage(outBmp);
+            g.Clear(Color.Black);
+
+            // 设置画布的描绘质量
+            g.CompositingQuality = CompositingQuality.HighQuality;
+            g.SmoothingMode = SmoothingMode.HighQuality;
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+            g.DrawImage((Image)imgSource.Clone(), new Rectangle((destWidth - sW) / 2, (destHeight - sH) / 2, sW, sH), 0, 0, imgSource.Width, imgSource.Height, GraphicsUnit.Pixel);
+            g.Dispose();
+
+            // 以下代码为保存图片时，设置压缩质量
+            EncoderParameters encoderParams = new EncoderParameters();
+            long[] quality = new long[1];
+            quality[0] = 100;
+
+            EncoderParameter encoderParam = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
+            encoderParams.Param[0] = encoderParam;
+
+            try
+            {
+                //获得包含有关内置图像编码解码器的信息的ImageCodecInfo 对象。
+                ImageCodecInfo[] arrayICI = ImageCodecInfo.GetImageEncoders();
+                ImageCodecInfo jpegICI = null;
+                for (int x = 0; x < arrayICI.Length; x++)
+                {
+                    if (arrayICI[x].FormatDescription.Equals("JPEG"))
+                    {
+                        jpegICI = arrayICI[x];//设置JPEG编码
+                        break;
+                    }
+                }
+
+                if (jpegICI != null)
+                {
+                    outBmp.Save(@"C:\\abc.jpg", jpegICI, encoderParams);
+                }
+                else
+                {
+                    outBmp.Save(@"C:\\abc.jpg", thisFormat);
+                }
+
+            }
+            catch
+            {
+            }
+            finally
+            {
+                imgSource.Dispose();
+                outBmp.Dispose();
+            }
+
+
             List<MC.IisSite.Models.IisSite> sites = GetList();
             var oldStr = System.IO.File.ReadAllText(Server.MapPath("~/") + "\\Data\\SiteData.json");
             var getOld = JsonConvert.DeserializeObject<List<SiteSave>>(oldStr);

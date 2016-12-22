@@ -5,3 +5,11 @@ D:\Study\MCTest\MCTest\Message.Proxy\bin\Release\System.Net.Http.xml
 D:\Study\MCTest\MCTest\Message.Proxy\bin\Release\zh-Hans\System.Net.Http.resources.dll
 D:\Study\MCTest\MCTest\Message.Proxy\obj\Release\Message.Proxy.dll
 D:\Study\MCTest\MCTest\Message.Proxy\obj\Release\Message.Proxy.pdb
+D:\Git-MC\mctest\MCTest\Message.Proxy\bin\Release\Message.Proxy.dll
+D:\Git-MC\mctest\MCTest\Message.Proxy\bin\Release\Message.Proxy.pdb
+D:\Git-MC\mctest\MCTest\Message.Proxy\bin\Release\System.Net.Http.dll
+D:\Git-MC\mctest\MCTest\Message.Proxy\bin\Release\System.Net.Http.xml
+D:\Git-MC\mctest\MCTest\Message.Proxy\bin\Release\zh-Hans\System.Net.Http.resources.dll
+D:\Git-MC\mctest\MCTest\Message.Proxy\obj\Release\Message.Proxy.csprojResolveAssemblyReference.cache
+D:\Git-MC\mctest\MCTest\Message.Proxy\obj\Release\Message.Proxy.dll
+D:\Git-MC\mctest\MCTest\Message.Proxy\obj\Release\Message.Proxy.pdb

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<packages>
+  <package id="Castle.Core" version="3.3.0" targetFramework="net45" />
+  <package id="Castle.Windsor" version="3.3.0" targetFramework="net45" />
+  <package id="Newtonsoft.Json" version="7.0.1-beta3" targetFramework="net45" />
+  <package id="redis-64" version="3.0.503" targetFramework="net45" />
+  <package id="ServiceStack.Common" version="4.5.4" targetFramework="net45" />
+  <package id="ServiceStack.Interfaces" version="4.5.4" targetFramework="net45" />
+  <package id="ServiceStack.RedisTest" version="4.5.4" targetFramework="net45" />
+  <package id="ServiceStack.Text" version="4.5.4" targetFramework="net45" />
+  <package id="StackExchange.RedisTest" version="1.1.608" targetFramework="net45" requireReinstallation="true" />
+</packages>

@@ -20,10 +20,12 @@ namespace MCTest
             return output;
         }
 
-        public static IOutput 通过反射获取实例(string name)
+        public static IOutput 通过反射获取实例<T>()
         {
-            IOutput output = (IOutput) Assembly.GetExecutingAssembly().CreateInstance(name);
+            var type = typeof (T).FullName.ToString();
+            IOutput output = (IOutput) Assembly.GetExecutingAssembly().CreateInstance(type);
             return output;
         }
+        public void a() { }
     }
 }
