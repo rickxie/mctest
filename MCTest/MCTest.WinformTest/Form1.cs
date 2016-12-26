@@ -13,80 +13,15 @@ using MaterialSkin.Controls;
 
 namespace MCTest.WinformTest
 {
-    public partial class Form1 : MaterialForm
+    public partial class frmMain : Form
     {
-        public Form1()
+        BindingList<InterestCalc> calcBl = new BindingList<InterestCalc>(); 
+        BindingList<DateCalc> calcDate = new BindingList<DateCalc>(); 
+        public frmMain()
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var file = openFileDialog1.ShowDialog();
-            if (file == DialogResult.OK )
-            {
-                var destWidth = 872;
-                var destHeight = 384;
-                var fileName = openFileDialog1.FileName;
-                System.Drawing.Image imgSource = Image.FromFile(fileName); ;
-                System.Drawing.Imaging.ImageFormat thisFormat = imgSource.RawFormat;
-                int sW = destWidth, sH = destHeight;
-
-                Bitmap outBmp = new Bitmap(destWidth, destHeight);
-                Graphics g = Graphics.FromImage(outBmp);
-                g.Clear(Color.Black);
-
-                // 设置画布的描绘质量
-                g.CompositingQuality = CompositingQuality.HighQuality;
-                g.SmoothingMode = SmoothingMode.HighQuality;
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-
-                g.DrawImage(imgSource, new Rectangle((destWidth - sW) / 2, (destHeight - sH) / 2, sW, sH), 0, 0, imgSource.Width, imgSource.Height, GraphicsUnit.Pixel);
-                g.Dispose();
-
-                // 以下代码为保存图片时，设置压缩质量
-                EncoderParameters encoderParams = new EncoderParameters();
-                long[] quality = new long[1];
-                quality[0] = 100;
-
-                EncoderParameter encoderParam = new EncoderParameter(System.Drawing.Imaging.Encoder.Quality, quality);
-                encoderParams.Param[0] = encoderParam;
-
-                try
-                {
-                    //获得包含有关内置图像编码解码器的信息的ImageCodecInfo 对象。
-                    ImageCodecInfo[] arrayICI = ImageCodecInfo.GetImageEncoders();
-                    ImageCodecInfo jpegICI = null;
-                    for (int x = 0; x < arrayICI.Length; x++)
-                    {
-                        if (arrayICI[x].FormatDescription.Equals("JPEG"))
-                        {
-                            jpegICI = arrayICI[x];//设置JPEG编码
-                            break;
-                        }
-                    }
-
-                    if (jpegICI != null)
-                    {
-                        outBmp.Save(@"C:\\abc.jpg", jpegICI, encoderParams);
-                    }
-                    else
-                    {
-                        outBmp.Save(@"C:\\abc.jpg", thisFormat);
-                    }
-
-                }
-                catch
-                {
-                }
-                finally
-                {
-                    imgSource.Dispose();
-                    outBmp.Dispose();
-                }
-            }
-
-        }
+         
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
@@ -128,6 +63,42 @@ namespace MCTest.WinformTest
         private void ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            dataGridView3.AutoGenerateColumns = false;
+            dataGridView3.AllowUserToAddRows = true;
+            dataGridView3.DataSource = calcBl;
+            dataGridView2.AutoGenerateColumns = false;
+            dataGridView2.AllowUserToAddRows = true;
+            dataGridView2.DataSource = calcDate;
+        }
+
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            for (int i = 0; i < calcBl.Count; i++)
+            {
+                calcBl[i].Calc();
+            }
+        }
+
+        private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView3.Columns[e.ColumnIndex].Name == "colCalc")
+            {
+                calcBl[e.RowIndex].Calc();
+                dataGridView3.Refresh();
+            }
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dataGridView2.Columns[e.ColumnIndex].Name == "colCalcD")
+            {
+                calcDate[e.RowIndex].Calc();
+                dataGridView2.Refresh();
+            }
         }
     }
 }
