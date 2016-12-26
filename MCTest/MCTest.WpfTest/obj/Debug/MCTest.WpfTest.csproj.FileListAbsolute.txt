@@ -1,0 +1,17 @@
+D:\Git-MC\mctest\MCTest\MCTest.WpfTest\bin\Debug\MCTest.WpfTest.exe.config
+D:\Git-MC\mctest\MCTest\MCTest.WpfTest\bin\Debug\date.txt
+D:\Git-MC\mctest\MCTest\MCTest.WpfTest\bin\Debug\MCTest.WpfTest.exe
+D:\Git-MC\mctest\MCTest\MCTest.WpfTest\bin\Debug\MCTest.WpfTest.pdb
+D:\Git-MC\mctest\MCTest\MCTest.WpfTest\bin\Debug\MCTest.WinformTest.exe
+D:\Git-MC\mctest\MCTest\MCTest.WpfTest\bin\Debug\MCTest.WinformTest.pdb
+D:\Git-MC\mctest\MCTest\MCTest.WpfTest\obj\Debug\MCTest.WpfTest.csprojResolveAssemblyReference.cache
+D:\Git-MC\mctest\MCTest\MCTest.WpfTest\obj\Debug\MainWindow.g.cs
+D:\Git-MC\mctest\MCTest\MCTest.WpfTest\obj\Debug\App.g.cs
+D:\Git-MC\mctest\MCTest\MCTest.WpfTest\obj\Debug\MCTest.WpfTest_MarkupCompile.cache
+D:\Git-MC\mctest\MCTest\MCTest.WpfTest\obj\Debug\MCTest.WpfTest_MarkupCompile.lref
+D:\Git-MC\mctest\MCTest\MCTest.WpfTest\obj\Debug\MainWindow.baml
+D:\Git-MC\mctest\MCTest\MCTest.WpfTest\obj\Debug\MCTest.WpfTest.g.resources
+D:\Git-MC\mctest\MCTest\MCTest.WpfTest\obj\Debug\MCTest.WpfTest.Properties.Resources.resources
+D:\Git-MC\mctest\MCTest\MCTest.WpfTest\obj\Debug\MCTest.WpfTest.csproj.GenerateResource.Cache
+D:\Git-MC\mctest\MCTest\MCTest.WpfTest\obj\Debug\MCTest.WpfTest.exe
+D:\Git-MC\mctest\MCTest\MCTest.WpfTest\obj\Debug\MCTest.WpfTest.pdb

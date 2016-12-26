@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MaterialSkin.Controls;
+//using MaterialSkin.Controls;
 
 namespace MCTest.WinformTest
 {
@@ -31,7 +31,6 @@ namespace MCTest.WinformTest
             }
             if (this.WindowState == FormWindowState.Minimized)
             {
-                this.Hide();//隐藏本窗体
                 this.notifyIcon1.Visible = true;//展示出notifyicon控件
             }
         }

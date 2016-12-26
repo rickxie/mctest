@@ -1,6 +1,4 @@
 D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Debug\MCTest.WinformTest.exe.config
-D:\Git-MC\mctest\MCTest\MCTest.WinformTest\obj\Debug\MCTest.WinformTest.csprojResolveAssemblyReference.cache
-D:\Git-MC\mctest\MCTest\MCTest.WinformTest\obj\Debug\MCTest.WinformTest.Form1.resources
 D:\Git-MC\mctest\MCTest\MCTest.WinformTest\obj\Debug\MCTest.WinformTest.Properties.Resources.resources
 D:\Git-MC\mctest\MCTest\MCTest.WinformTest\obj\Debug\MCTest.WinformTest.csproj.GenerateResource.Cache
 D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Debug\MCTest.WinformTest.exe
@@ -9,7 +7,6 @@ D:\Git-MC\mctest\MCTest\MCTest.WinformTest\obj\Debug\MCTest.WinformTest.exe
 D:\Git-MC\mctest\MCTest\MCTest.WinformTest\obj\Debug\MCTest.WinformTest.pdb
 D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Debug\WeifenLuo.WinFormsUI.Docking.dll
 D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Debug\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll
-D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Debug\MaterialSkin.dll
 C:\project\mctest\MCTest\MCTest.WinformTest\bin\Debug\MCTest.WinformTest.exe.config
 C:\project\mctest\MCTest\MCTest.WinformTest\obj\Debug\MCTest.WinformTest.exe
 C:\project\mctest\MCTest\MCTest.WinformTest\obj\Debug\MCTest.WinformTest.pdb
@@ -23,3 +20,9 @@ C:\project\mctest\MCTest\MCTest.WinformTest\obj\Debug\MCTest.WinformTest.Propert
 C:\project\mctest\MCTest\MCTest.WinformTest\obj\Debug\MCTest.WinformTest.csproj.GenerateResource.Cache
 C:\project\mctest\MCTest\MCTest.WinformTest\obj\Debug\MCTest.WinformTest.csprojResolveAssemblyReference.cache
 C:\project\mctest\MCTest\MCTest.WinformTest\bin\Debug\date.txt
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Debug\date.txt
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\obj\Debug\MCTest.WinformTest.frmMain.resources
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Debug\System.Net.Http.dll
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Debug\System.Net.Http.xml
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Debug\zh-Hans\System.Net.Http.resources.dll
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\obj\Debug\MCTest.WinformTest.csprojResolveAssemblyReference.cache

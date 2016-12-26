@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MCTest.WinformTest
 {
-    public class InterestCalc
+    public class InterestCalc : INotifyPropertyChanged
     {
         public InterestCalc()
         {
@@ -93,6 +94,13 @@ namespace MCTest.WinformTest
             {
                 TxtInterestDay = Convert.ToString(Math.Round(Convert.ToDouble((Amount * Rate) / (Interest / DueDate)), 2));
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        void OnPropertyChanged(string name)
+        {
+            if (PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(name));
         }
     }
     public class DateCalc
