@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -178,10 +178,10 @@
             // 
             // colCalc
             // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.NullValue = "计算";
-            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(1);
-            this.colCalc.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle5.NullValue = "计算";
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(1);
+            this.colCalc.DefaultCellStyle = dataGridViewCellStyle5;
             this.colCalc.HeaderText = "操作";
             this.colCalc.Name = "colCalc";
             this.colCalc.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -249,6 +249,7 @@
             this.txtResult.Margin = new System.Windows.Forms.Padding(2);
             this.txtResult.Multiline = true;
             this.txtResult.Name = "txtResult";
+            this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtResult.Size = new System.Drawing.Size(278, 231);
             this.txtResult.TabIndex = 0;
             // 
@@ -293,10 +294,10 @@
             // colCalcD
             // 
             this.colCalcD.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.NullValue = "计算";
-            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(1);
-            this.colCalcD.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.NullValue = "计算";
+            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(1);
+            this.colCalcD.DefaultCellStyle = dataGridViewCellStyle6;
             this.colCalcD.FillWeight = 60F;
             this.colCalcD.Frozen = true;
             this.colCalcD.HeaderText = "操作";

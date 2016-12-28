@@ -162,6 +162,10 @@ namespace MCTest.WinformTest
             {
                 while ((line = reader.ReadLine()) !=  null)
                 {
+                    if (line.StartsWith("#"))
+                    {
+                        continue;
+                    }
                     var dtxt = line.Substring(0, line.IndexOf(" "));
                     DateTime dt;
                     if (DateTime.TryParse(dtxt, out dt))
@@ -196,12 +200,14 @@ namespace MCTest.WinformTest
             {
                 endDate = endDate.AddDays(1);
                 isEnable = !(endDate.DayOfWeek == DayOfWeek.Saturday || endDate.DayOfWeek == DayOfWeek.Sunday);
-                if (overrideDate.ContainsKey(startDate))
+                var dateChanged = string.Empty;
+                if (overrideDate.ContainsKey(endDate))
                 {
                     isEnable = overrideDate[endDate];
+                    dateChanged = "(节假日调整)";
                 }
                 i++;
-                sb.AppendLine(i + " " + endDate.ToString("yyyy-MM-dd") + " " + endDate.DayOfWeek.ToChinese());
+                sb.AppendLine(i + " " + endDate.ToString("yyyy-MM-dd") + " " + endDate.DayOfWeek.ToChinese() + dateChanged);
                 if (i == totalDays)
                 {
                     sb.AppendLine("--------");
@@ -221,12 +227,14 @@ namespace MCTest.WinformTest
             {
                 startDate = startDate.AddDays(-1);
                 isEnable = !(startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday);
+                var dateChanged = string.Empty;
                 if (overrideDate.ContainsKey(startDate))
                 {
                     isEnable = overrideDate[startDate];
+                    dateChanged = "(节假日调整)";
                 }
                 i++;
-                sb.AppendLine(i + " " + startDate.ToString("yyyy-MM-dd") + " " + startDate.DayOfWeek.ToChinese());
+                sb.AppendLine(i + " " + startDate.ToString("yyyy-MM-dd") + " " + startDate.DayOfWeek.ToChinese() + dateChanged);
 
                 if (i == TotalDays)
                 {
@@ -246,12 +254,14 @@ namespace MCTest.WinformTest
             {
                 startDate = startDate.AddDays(1);
                 isEnable = !(startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday);
+                var dateChanged = string.Empty;
                 if (overrideDate.ContainsKey(startDate))
                 {
                     isEnable = overrideDate[startDate];
-                } 
+                    dateChanged = "(节假日调整)";
+                }
                 i++;
-                sb.AppendLine(i + " " + startDate.ToString("yyyy-MM-dd") + " " + startDate.DayOfWeek.ToChinese());
+                sb.AppendLine(i + " " + startDate.ToString("yyyy-MM-dd") + " " + startDate.DayOfWeek.ToChinese()+dateChanged);
 
                 if (endDate == startDate)
                 {
