@@ -98,8 +98,14 @@ namespace MCTest.WinformTest
                 calcDate[e.RowIndex].Calc();
                 dataGridView2.Refresh();
             }
-            txtResult.Text = calcDate[e.RowIndex].TxtResult;
+            txtResult.Text = calcDate[e.RowIndex].TxtResult;  
+            monthCalendar1.SelectionRange = new SelectionRange(calcDate[e.RowIndex].LowerSelectedDate, calcDate[e.RowIndex].UpperSelectedDate);
+            monthCalendar1.BoldedDates = calcDate[e.RowIndex].SelectedDate.ToArray();
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            monthCalendar1.Visible = !monthCalendar1.Visible;
         }
     }
 }

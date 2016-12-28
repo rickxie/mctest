@@ -109,6 +109,14 @@ namespace MCTest.WinformTest
         public string TxtEndDate { get; set; }
         public string TxtTotalDays { get; set; }
         public string TxtResult { get; set; }
+        public List<DateTime> SelectedDate { get; set; }
+        public DateTime LowerSelectedDate => SelectedDate.OrderBy(r => r).First();
+        public DateTime UpperSelectedDate => SelectedDate.OrderBy(r => r).Last();
+
+        public DateCalc()
+        {
+            SelectedDate = new List<DateTime>();
+        }
         public DateTime? StartDate {
             get
             {
@@ -192,6 +200,7 @@ namespace MCTest.WinformTest
         public DateTime GetEndDate(DateTime startDate, int totalDays)
         {
             StringBuilder sb = new StringBuilder();
+            SelectedDate.Clear();
             var overrideDate = GetAllDate();
             DateTime endDate = startDate;
             int i = 0;
@@ -208,6 +217,7 @@ namespace MCTest.WinformTest
                 }
                 i++;
                 sb.AppendLine(i + " " + endDate.ToString("yyyy-MM-dd") + " " + endDate.DayOfWeek.ToChinese() + dateChanged);
+                SelectedDate.Add(endDate);
                 if (i == totalDays)
                 {
                     sb.AppendLine("--------");
@@ -219,6 +229,7 @@ namespace MCTest.WinformTest
         public DateTime GetStartDate(DateTime endDate, int totalDays)
         {
             StringBuilder sb = new StringBuilder();
+            SelectedDate.Clear();
             var overrideDate = GetAllDate();
             DateTime startDate = endDate;
             int i = 0;
@@ -235,6 +246,7 @@ namespace MCTest.WinformTest
                 }
                 i++;
                 sb.AppendLine(i + " " + startDate.ToString("yyyy-MM-dd") + " " + startDate.DayOfWeek.ToChinese() + dateChanged);
+                SelectedDate.Add(endDate);
 
                 if (i == TotalDays)
                 {
@@ -246,6 +258,7 @@ namespace MCTest.WinformTest
         }
         public int GetTotalDays(DateTime startDate, DateTime endDate)
         {
+            SelectedDate.Clear();
             StringBuilder sb = new StringBuilder();
             var overrideDate = GetAllDate(); 
             int i = 0;
@@ -262,6 +275,7 @@ namespace MCTest.WinformTest
                 }
                 i++;
                 sb.AppendLine(i + " " + startDate.ToString("yyyy-MM-dd") + " " + startDate.DayOfWeek.ToChinese()+dateChanged);
+                SelectedDate.Add(endDate);
 
                 if (endDate == startDate)
                 {

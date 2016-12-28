@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -48,12 +48,14 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.txtResult = new System.Windows.Forms.TextBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
             this.colStartDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEndDay = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCalcD = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.txtResult = new System.Windows.Forms.TextBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.button1 = new System.Windows.Forms.Button();
             this.interestCalcBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.contextMenuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -178,10 +180,10 @@
             // 
             // colCalc
             // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.NullValue = "计算";
-            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(1);
-            this.colCalc.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.NullValue = "计算";
+            dataGridViewCellStyle3.Padding = new System.Windows.Forms.Padding(1);
+            this.colCalc.DefaultCellStyle = dataGridViewCellStyle3;
             this.colCalc.HeaderText = "操作";
             this.colCalc.Name = "colCalc";
             this.colCalc.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -215,6 +217,8 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.button1);
+            this.splitContainer1.Panel2.Controls.Add(this.monthCalendar1);
             this.splitContainer1.Panel2.Controls.Add(this.txtResult);
             this.splitContainer1.Size = new System.Drawing.Size(728, 231);
             this.splitContainer1.SplitterDistance = 448;
@@ -240,29 +244,6 @@
             this.dataGridView2.Size = new System.Drawing.Size(448, 231);
             this.dataGridView2.TabIndex = 7;
             this.dataGridView2.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellContentClick);
-            // 
-            // txtResult
-            // 
-            this.txtResult.BackColor = System.Drawing.SystemColors.ButtonShadow;
-            this.txtResult.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtResult.Location = new System.Drawing.Point(0, 0);
-            this.txtResult.Margin = new System.Windows.Forms.Padding(2);
-            this.txtResult.Multiline = true;
-            this.txtResult.Name = "txtResult";
-            this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtResult.Size = new System.Drawing.Size(278, 231);
-            this.txtResult.TabIndex = 0;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(2);
-            this.tabPage3.Size = new System.Drawing.Size(732, 235);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "估值查询";
-            this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // colStartDay
             // 
@@ -294,10 +275,10 @@
             // colCalcD
             // 
             this.colCalcD.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.NullValue = "计算";
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(1);
-            this.colCalcD.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle4.NullValue = "计算";
+            dataGridViewCellStyle4.Padding = new System.Windows.Forms.Padding(1);
+            this.colCalcD.DefaultCellStyle = dataGridViewCellStyle4;
             this.colCalcD.FillWeight = 60F;
             this.colCalcD.Frozen = true;
             this.colCalcD.HeaderText = "操作";
@@ -307,6 +288,51 @@
             this.colCalcD.Text = "计算";
             this.colCalcD.UseColumnTextForButtonValue = true;
             this.colCalcD.Width = 60;
+            // 
+            // txtResult
+            // 
+            this.txtResult.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.txtResult.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtResult.Location = new System.Drawing.Point(0, 0);
+            this.txtResult.Margin = new System.Windows.Forms.Padding(2);
+            this.txtResult.Multiline = true;
+            this.txtResult.Name = "txtResult";
+            this.txtResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtResult.Size = new System.Drawing.Size(278, 231);
+            this.txtResult.TabIndex = 0;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(2);
+            this.tabPage3.Size = new System.Drawing.Size(732, 235);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "估值查询";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.BoldedDates = new System.DateTime[] {
+        new System.DateTime(2016, 12, 28, 12, 21, 22, 0)};
+            this.monthCalendar1.ForeColor = System.Drawing.SystemColors.Info;
+            this.monthCalendar1.Location = new System.Drawing.Point(24, 29);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.SelectionRange = new System.Windows.Forms.SelectionRange(new System.DateTime(2016, 12, 26, 0, 0, 0, 0), new System.DateTime(2017, 1, 1, 0, 0, 0, 0));
+            this.monthCalendar1.ShowTodayCircle = false;
+            this.monthCalendar1.TabIndex = 1;
+            this.monthCalendar1.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(210, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(44, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "日历";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // interestCalcBindingSource
             // 
@@ -366,6 +392,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colEndDay;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDays;
         private System.Windows.Forms.DataGridViewButtonColumn colCalcD;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.Button button1;
     }
 }
 
