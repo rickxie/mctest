@@ -1,0 +1,15 @@
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Release\MCTest.WinformTest.exe.config
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Release\date.txt
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Release\MCTest.WinformTest.exe
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Release\MCTest.WinformTest.pdb
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Release\System.Net.Http.dll
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Release\WeifenLuo.WinFormsUI.Docking.dll
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Release\WeifenLuo.WinFormsUI.Docking.ThemeVS2015.dll
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Release\System.Net.Http.xml
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\bin\Release\zh-Hans\System.Net.Http.resources.dll
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\obj\Release\MCTest.WinformTest.csprojResolveAssemblyReference.cache
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\obj\Release\MCTest.WinformTest.frmMain.resources
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\obj\Release\MCTest.WinformTest.Properties.Resources.resources
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\obj\Release\MCTest.WinformTest.csproj.GenerateResource.Cache
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\obj\Release\MCTest.WinformTest.exe
+D:\Git-MC\mctest\MCTest\MCTest.WinformTest\obj\Release\MCTest.WinformTest.pdb

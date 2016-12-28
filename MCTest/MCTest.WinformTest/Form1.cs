@@ -98,6 +98,8 @@ namespace MCTest.WinformTest
                 calcDate[e.RowIndex].Calc();
                 dataGridView2.Refresh();
             }
+            txtResult.Text = calcDate[e.RowIndex].TxtResult;
+
         }
     }
 }

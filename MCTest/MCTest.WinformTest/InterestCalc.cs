@@ -108,6 +108,7 @@ namespace MCTest.WinformTest
         public string TxtStartDate { get; set; }
         public string TxtEndDate { get; set; }
         public string TxtTotalDays { get; set; }
+        public string TxtResult { get; set; }
         public DateTime? StartDate {
             get
             {
@@ -186,59 +187,105 @@ namespace MCTest.WinformTest
 
         public DateTime GetEndDate(DateTime startDate, int totalDays)
         {
+            StringBuilder sb = new StringBuilder();
             var overrideDate = GetAllDate();
             DateTime endDate = startDate;
             int i = 0;
-            while (i != totalDays)
+            var isEnable = true;
+            while (i < totalDays || !isEnable)
             {
                 endDate = endDate.AddDays(1);
-                var isEnable = !(endDate.DayOfWeek == DayOfWeek.Saturday || endDate.DayOfWeek == DayOfWeek.Sunday);
+                isEnable = !(endDate.DayOfWeek == DayOfWeek.Saturday || endDate.DayOfWeek == DayOfWeek.Sunday);
                 if (overrideDate.ContainsKey(startDate))
                 {
                     isEnable = overrideDate[endDate];
                 }
-
-                if (isEnable)
-                    i++;
+                i++;
+                sb.AppendLine(i + " " + endDate.ToString("yyyy-MM-dd") + " " + endDate.DayOfWeek.ToChinese());
+                if (i == totalDays)
+                {
+                    sb.AppendLine("--------");
+                }
             }
+            TxtResult = sb.ToString();
             return endDate;
         }
         public DateTime GetStartDate(DateTime endDate, int totalDays)
         {
+            StringBuilder sb = new StringBuilder();
             var overrideDate = GetAllDate();
-            DateTime startDate = endDate.AddDays(-1);
+            DateTime startDate = endDate;
             int i = 0;
-            while (i != totalDays)
+            var isEnable = true;
+            while (i < totalDays || !isEnable)
             {
                 startDate = startDate.AddDays(-1);
-                var isEnable = !(startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday);
+                isEnable = !(startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday);
                 if (overrideDate.ContainsKey(startDate))
                 {
                     isEnable = overrideDate[startDate];
                 }
-                if (isEnable)
-                    i++;
+                i++;
+                sb.AppendLine(i + " " + startDate.ToString("yyyy-MM-dd") + " " + startDate.DayOfWeek.ToChinese());
+
+                if (i == TotalDays)
+                {
+                    sb.AppendLine("--------");
+                }
             }
+            TxtResult = sb.ToString();
             return startDate;
         }
         public int GetTotalDays(DateTime startDate, DateTime endDate)
         {
+            StringBuilder sb = new StringBuilder();
             var overrideDate = GetAllDate(); 
             int i = 0;
             var isEnable = true;
-            while (startDate < endDate)
+            while (startDate < endDate || !isEnable)
             {
                 startDate = startDate.AddDays(1);
                 isEnable = !(startDate.DayOfWeek == DayOfWeek.Saturday || startDate.DayOfWeek == DayOfWeek.Sunday);
                 if (overrideDate.ContainsKey(startDate))
                 {
                     isEnable = overrideDate[startDate];
+                } 
+                i++;
+                sb.AppendLine(i + " " + startDate.ToString("yyyy-MM-dd") + " " + startDate.DayOfWeek.ToChinese());
+
+                if (endDate == startDate)
+                {
+                    sb.AppendLine("--------");
                 }
-                if (isEnable)
-                    i++;
             }
+            TxtResult = sb.ToString();
             return i;
         }
 
+    }
+
+    public static class DateExtension
+    {
+        public static string ToChinese(this DayOfWeek week)
+        {
+            switch (week)
+            {
+                  case DayOfWeek.Monday:
+                    return "周一";
+                  case DayOfWeek.Tuesday:
+                    return "周二";
+                  case DayOfWeek.Wednesday:
+                    return "周三";
+                case DayOfWeek.Thursday:
+                    return "周四";
+                case DayOfWeek.Friday:
+                    return "周五";
+                case DayOfWeek.Saturday:
+                    return "周六";
+                case DayOfWeek.Sunday:
+                    return "周日";
+            }
+            return null;
+        }
     }
 }
