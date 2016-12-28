@@ -29,36 +29,37 @@ namespace MCTest
             var serverConf = "127.0.0.1:6380,127.0.0.1:6381";
             var sentinelConf = "127.0.0.1:5000,127.0.0.1:5001";
             RedisClient client = new RedisClient(serverConf, sentinelConf);
+            client.SystemKey = "Redis";
             client.Start();
-            while (true)
+            List<RoleId> roleids = new List<RoleId>();
+
+            for (int i = 0; i < 100000; i++)
             {
-                if (Console.ReadLine() == "P")
-                {
-//                    subscriber.Publish("update", "hello world");
-                }
+                roleids.Add(new RoleId() {Id =  i.ToString(), JobId =  "JobId+"+i, Name = "Xiaoming", Sex = "男"});
             }
-            //var writeDb = writeConn.GetDatabase(1);
-            //var i = 0;
-            //var get = writeDb.StringGet("testKeyRedis");
-            //i = Convert.ToInt32(get);
-            //while (true)
-            //{
-            //    try
-            //    {
-            //        i++;
-            //        writeDb.StringSet("testKeyRedis", i.ToString());
-            //        WriteLine("Set key:" + i);
-            //        Thread.Sleep(1000);
-            //        get = writeDb.StringGet("testKeyRedis");
-            //        WriteLine("Get key:" + get);
-            //    }
-            //    catch (Exception)
-            //    {
-            //        Thread.Sleep(1000);
-            //        WriteError();
-            //        continue;
-            //    }
-            //}
+            
+            client.ListSet("Role", roleids);
+//            client.ListSet("Role1", roleids);
+//            client.ListSet("Role2", roleids);
+//            client.ListSet("Role3", roleids);
+//            client.ListSet("Role4", roleids);
+
+
+            var times = new List<double>();
+            for (int i = 0; i < 15; i++)
+            {
+                Stopwatch sp = new Stopwatch();
+                sp.Start();
+                var count = client.ListGet<RoleId>("Role").Count;
+//                    var count1 = client.ListGet<RoleId>("Role1").Count;
+//                    var count2 = client.ListGet<RoleId>("Role2").Count;
+//                    var count3 = client.ListGet<RoleId>("Role3").Count;
+//                    var count4 = client.ListGet<RoleId>("Role4").Count;
+                sp.Stop();
+                times.Add(sp.Elapsed.TotalMilliseconds);
+                Console.WriteLine(string.Format("本次耗时:{0}", sp.Elapsed.TotalMilliseconds));
+            }
+            Console.WriteLine(string.Format("共计获取{0}条数据， 测试 {1} 次 平均:{2}", 100000, times.Count, times.Average()));
         }
 
         private void WriteError()
@@ -85,6 +86,15 @@ namespace MCTest
 //            {
 //                WriteWarn((string)message);
 //            });
+        }
+
+
+        public class RoleId
+        {
+            public string Id { get; set; }
+            public string JobId { get; set; }
+            public string Name { get; set; }
+            public string Sex { get; set; }
         }
     }
 
@@ -212,6 +222,7 @@ namespace MCTest
             key = AddSysCustomKey(key);
             return Do(db => db.StringGet(key));
         }
+     
 
         /// <summary>
         /// 获取一个key的对象
@@ -254,26 +265,36 @@ namespace MCTest
         /// 移除指定ListId的内部List的值
         /// </summary>
         /// <param name="key"></param>
-        /// <param name="value"></param>
-        public void ListRemove<T>(string key, T value)
+        public void ListRemove<T>(string key)
         {
             key = AddSysCustomKey(key);
-            Do(db => db.ListRemove(key, ConvertJson(value)));
+            var all = ListGet<T>(key);
+            foreach (var single in all)
+            {
+                var s = single;
+                Do(db => db.ListRemove(key, ConvertJson(s)));
+            }
         }
-
+        /// <summary>
+        /// 入栈
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void ListSet<T>(string key, List<T> value)
+        {
+            key = AddSysCustomKey(key);
+            StringSet(key, ConvertJson(value));
+        }
         /// <summary>
         /// 获取指定key的List
         /// </summary>
         /// <param name="key"></param>
         /// <returns></returns>
-        public List<T> ListRange<T>(string key)
+        public List<T> ListGet<T>(string key)
         {
             key = AddSysCustomKey(key);
-            return Do(redis =>
-            {
-                var values = redis.ListRange(key);
-                return ConvetList<T>(values);
-            });
+            return ConvetList<T>(StringGet(key));
         }
 
         public string AddSysCustomKey(string key)
@@ -338,6 +359,10 @@ namespace MCTest
             return JsonConvert.DeserializeObject<T>(value);
         }
 
+        private List<T> ConvetList<T>(string values)
+        {
+            return ConvertObj<List<T>>(values);
+        }
         private List<T> ConvetList<T>(RedisValue[] values)
         {
             List<T> result = new List<T>();
@@ -357,5 +382,13 @@ namespace MCTest
             return func(database);
         }
         #endregion
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public static class RedisHelper
+    {
+        
     }
 }
