@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace MCTest.WinformTest
@@ -162,6 +163,7 @@ namespace MCTest.WinformTest
 
         public Dictionary<DateTime, bool> GetAllDate()
         {
+
             var dateDict = new Dictionary<DateTime, bool>();
             var dateFile = AppDomain.CurrentDomain.BaseDirectory + "date.txt";
             var line = "";
@@ -174,6 +176,8 @@ namespace MCTest.WinformTest
                     {
                         continue;
                     }
+
+                    var regx = new Regex("");
                     var dtxt = line.Substring(0, line.IndexOf(" "));
                     DateTime dt;
                     if (DateTime.TryParse(dtxt, out dt))

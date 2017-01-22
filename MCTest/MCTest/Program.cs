@@ -41,7 +41,10 @@ namespace MCTest
 //            obj = 工厂.通过反射获取实例(currAss + ".TaskSs");
 //            obj = 工厂.通过反射获取实例(currAss + ".AnyscAwait");
 //            obj = 工厂.通过反射获取实例(currAss + ".Serialization");
-            obj = 工厂.通过反射获取实例< RedisTest>();
+            //obj = 工厂.通过反射获取实例< RedisTest>();
+            //obj = 工厂.通过反射获取实例<ListPerformanceTest>();
+            obj = 工厂.通过反射获取实例<ITextPdf>();
+            obj = 工厂.通过反射获取实例<FileLog>();
 
             obj.Main();
             Console.Read();

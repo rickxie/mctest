@@ -44,3 +44,5 @@ C:\project\mctest\MCTest\MCTest\bin\Debug\StackExchange.Redis.xml
 C:\project\mctest\MCTest\MCTest\obj\Debug\MCTest.csprojResolveAssemblyReference.cache
 C:\project\mctest\MCTest\MCTest\obj\Debug\MCTest.exe
 C:\project\mctest\MCTest\MCTest\obj\Debug\MCTest.pdb
+D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\itextsharp.dll
+D:\Git-MC\mctest\MCTest\MCTest\bin\Debug\itextsharp.xml

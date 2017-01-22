@@ -21,45 +21,128 @@ using StackExchange.Redis;
 
 namespace MCTest
 {
-    public class RedisTest : IOutput
+    public class CacheManager
     {
-        public void Main()
+        List<RoleId> _roleids = new List<RoleId>();
+        private RedisClient client;
+        public CacheManager()
         {
-
-            var serverConf = "127.0.0.1:6380,127.0.0.1:6381";
+            var serverConf = "10.0.0.25:6380,127.0.0.1:6381";
             var sentinelConf = "127.0.0.1:5000,127.0.0.1:5001";
-            RedisClient client = new RedisClient(serverConf, sentinelConf);
+            client = new RedisClient(serverConf, sentinelConf);
             client.SystemKey = "Redis";
             client.Start();
-            List<RoleId> roleids = new List<RoleId>();
-
-            for (int i = 0; i < 100000; i++)
+            client.Scriber.Add("CacheUpdate", () =>
             {
-                roleids.Add(new RoleId() {Id =  i.ToString(), JobId =  "JobId+"+i, Name = "Xiaoming", Sex = "男"});
+                _roleids = client.ListGet<RoleId>("RoleId");
+            });
+        }
+
+        public void LoadCache()
+        {
+            _roleids = RedisTest.roleidFromDb;
+            if (client.IsRuning)
+            {
+                client.ListSet("RoleId", _roleids);
             }
-            
-            client.ListSet("Role", roleids);
-//            client.ListSet("Role1", roleids);
-//            client.ListSet("Role2", roleids);
-//            client.ListSet("Role3", roleids);
-//            client.ListSet("Role4", roleids);
+        }
 
-
-            var times = new List<double>();
-            for (int i = 0; i < 15; i++)
+        public void UpdateCache(bool isRead)
+        {
+            //Fetch FromDb
+            if (isRead)
             {
+                _roleids = RedisTest.roleidFromDb;
+            }
+            else
+            {
+                _roleids = RedisTest.roleidsChangedOnUi;
+            }
+            //Sync multi machine
+//            if (client.IsRuning)
+//            {
+            if (client.IsRuning)
+            {
+                client.ListSet("RoleId", _roleids);
+                client.subScriber.Publish("CacheUpdate", "");
+            }
+        }
+
+        public string GetUserId()
+        {
+            return _roleids.First().Name;
+        }
+    }
+    public class RedisTest : IOutput
+    {
+        public void UpdateCache()
+        {
+            
+        }
+        public static List<RoleId> roleidFromDb = new List<RoleId>();
+        public static List<RoleId> roleidsChangedOnUi = new List<RoleId>();
+
+        public void Main()
+        {
+          
+            for (int i = 0; i < 10000; i++)
+            {
+                roleidFromDb.Add(new RoleId() {Id = i.ToString(), JobId = "JobId+" + i, Name = "+++++", Sex = "男"});
+                roleidsChangedOnUi.Add(new RoleId() {Id = i.ToString(), JobId = "JobId2+" + i, Name = "-----", Sex = "女"});
+            }
+
+            CacheManager cacheManager = new CacheManager();
+            cacheManager.LoadCache();
+            if (Console.ReadLine() == "P")
+            {
+                bool isRead = true;
+                Test(10000, () =>
+                {
+                    Thread.Sleep(5000);
+                    cacheManager.UpdateCache(isRead);
+                    isRead = !isRead;
+                }, "UpdateCache");
+            }
+
+            Test(10000, () =>
+            {
+                Thread.Sleep(1000);
+                Console.WriteLine("UserName: " + cacheManager.GetUserId());
+            }, "GetUserId");
+           
+            //##########################################################################################################
+
+
+            Console.ReadLine();
+        }
+
+
+        /// <summary>
+        /// 测试方法
+        /// </summary>
+        /// <param name="times"></param>
+        /// <param name="func"></param>
+        /// <param name="name"></param>
+        public void Test(int times, Action func, string name = null)
+        {
+            name = name ?? string.Empty;
+            Task.Factory.StartNew(() =>
+            {
+                var timeList = new List<double>();
                 Stopwatch sp = new Stopwatch();
                 sp.Start();
-                var count = client.ListGet<RoleId>("Role").Count;
-//                    var count1 = client.ListGet<RoleId>("Role1").Count;
-//                    var count2 = client.ListGet<RoleId>("Role2").Count;
-//                    var count3 = client.ListGet<RoleId>("Role3").Count;
-//                    var count4 = client.ListGet<RoleId>("Role4").Count;
+                for (int i = 0; i < times; i++)
+                {
+                    Stopwatch sp2 = new Stopwatch();
+                    sp2.Start();
+                    func();
+                    sp2.Stop();
+                    timeList.Add(sp2.Elapsed.TotalMilliseconds);
+                    //Console.WriteLine(string.Format(name +" 本次耗时:{0}", sp2.Elapsed.TotalMilliseconds));
+                }
                 sp.Stop();
-                times.Add(sp.Elapsed.TotalMilliseconds);
-                Console.WriteLine(string.Format("本次耗时:{0}", sp.Elapsed.TotalMilliseconds));
-            }
-            Console.WriteLine(string.Format("共计获取{0}条数据， 测试 {1} 次 平均:{2}", 100000, times.Count, times.Average()));
+                Console.WriteLine(string.Format(name + " 共计测试 {0} 次 平均:{1}", times, timeList.Average()));
+            });
         }
 
         private void WriteError()
@@ -89,15 +172,15 @@ namespace MCTest
         }
 
 
-        public class RoleId
-        {
-            public string Id { get; set; }
-            public string JobId { get; set; }
-            public string Name { get; set; }
-            public string Sex { get; set; }
-        }
+       
     }
-
+    public class RoleId
+    {
+        public string Id { get; set; }
+        public string JobId { get; set; }
+        public string Name { get; set; }
+        public string Sex { get; set; }
+    }
 
     public interface ICacheClient
     {
@@ -105,24 +188,67 @@ namespace MCTest
         void Stop();
 
     }
-
-    public class CacheSubscribe
-    {
-
-    }
+     
 
     public class RedisClient : ICacheClient
     {
         public string SystemKey = string.Empty;
         private static ConnectionMultiplexer _conn;
         private static ConnectionMultiplexer _sentinel;
-        private static ISubscriber subScriber;
-        private static ISubscriber _sentinelsub;
+        public Dictionary<string, Action> Scriber = new Dictionary<string, Action>();
+        public ISubscriber subScriber;
+        private ISubscriber _sentinelsub;
+        public bool IsRuning => _conn != null && _conn.IsConnected;
 
-        /// <summary>
-        /// Stoped = 0 , Runing = 1
-        /// </summary>
-        public RedisServerStatus Status = RedisServerStatus.Stoped;
+        public void Start()
+        {
+            Task.Factory.StartNew(() =>
+            {
+                while (true)
+                {
+                    if (_conn == null || _conn.IsConnected == false)
+                    {
+                        try
+                        {
+                            _conn = ConnectionMultiplexer.Connect(BuildOptions(_serverConf));
+                            var sentineloption = BuildOptions(_sentinelConf);
+                            sentineloption.TieBreaker = ""; //sentinel模式一定要写
+                            sentineloption.CommandMap = CommandMap.Sentinel;
+                            sentineloption.ServiceName = "mymaster";
+                            _sentinel = ConnectionMultiplexer.Connect(sentineloption);
+                            _sentinel.ConnectionFailed += (sender, args) =>
+                            {
+                                Console.WriteLine("Conn ConnectionFailed");
+                            };
+                            _sentinel.ConnectionRestored += (sender, args) =>
+                            {
+                                Console.WriteLine("Conn ConnectionRestored");
+                            };
+                            subScriber = _conn.GetSubscriber();
+                            _sentinelsub = _sentinel.GetSubscriber();
+                            _sentinelsub.Subscribe("+switch-master", (channel, message) =>
+                            {
+                                //                WriteWarn((string)message);
+                            });
+                            Scriber.ForEach(r =>
+                            {
+                                subScriber.Subscribe(r.Key, (channel, value) =>
+                                {
+                                    r.Value();
+                                });
+
+                            });
+                           Console.WriteLine("Connected");
+                        }
+                        catch (Exception ex)
+                        {
+                        }
+                        Thread.Sleep(1000);
+                    }
+                }
+            });
+        }
+         
 
         private readonly List<AddressPort> _serverConf;
         private readonly List<AddressPort> _sentinelConf;
@@ -319,21 +445,6 @@ namespace MCTest
             return options;
         }
 
-        public void Start()
-        {
-
-            _conn = ConnectionMultiplexer.Connect(BuildOptions(_serverConf));
-            var sentineloption = BuildOptions(_sentinelConf);
-            sentineloption.TieBreaker = ""; //sentinel模式一定要写
-            sentineloption.CommandMap = CommandMap.Sentinel;
-            sentineloption.ServiceName = "mymaster";
-            _sentinel = ConnectionMultiplexer.Connect(sentineloption);
-            _sentinelsub = _sentinel.GetSubscriber();
-            _sentinelsub.Subscribe("+switch-master", (channel, message) =>
-            {
-//                WriteWarn((string)message);
-            });
-        }
 
         public struct AddressPort
         {
